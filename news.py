@@ -6,20 +6,20 @@ import psycopg2
 def access_database(table_name):
     db = psycopg2.connect(database="news")
     c = db.cursor()
-    query="select * from " + table_name
+    query = "select * from " + table_name
     c.execute(query)
     data = c.fetchall()
     db.close()
     return data
 
+
 def result(views):
     num = 0
     for view in views:
         if view[1] == int(view[1]):
-            print "%s -- %d" %(view[0], view[1])
+            print "%s -- %d" % (view[0], view[1])
         else:
-            print "%s -- %0.2f" %(view[0], view[1])
-
+            print "%s -- %0.2f" % (view[0], view[1])
 
 
 print "1. What are the most popular three articles of all time?"
