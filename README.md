@@ -84,7 +84,7 @@ create view request_error as
 
 After creating views, run the news.py in the terminal.
 
-'''
+```
 python news.py
 ```
 
