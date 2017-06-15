@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import psycopg2
 
 
@@ -10,30 +12,22 @@ def access_database(table_name):
     db.close()
     return data
 
-def three_most_popular(table):
+def result(views):
     num = 0
-    for list in table:
-        if num < 3:
-            print "%s -- %i" %(list[0], list[1])
-            num += 1
+    for view in views:
+        if view[1] == int(view[1]):
+            print "%s -- %d" %(view[0], view[1])
         else:
-            break
-
-def find_request(table):
-    for list in table:
-        if list[3]> 1:
-            print "%s -- %d" %(list[0], list[3])
-        else:
-            pass
+            print "%s -- %0.2f" %(view[0], view[1])
 
 
 
 print "1. What are the most popular three articles of all time?"
 view_articles = access_database("popular_articles")
-three_most_popular(view_articles)
+result(view_articles)
 print "2. Who are the most popular article authors of all time?"
 view_authors = access_database("popular_authors")
-three_most_popular(view_authors)
+result(view_authors)
 print "3. On which days did more than 1% of requests lead to errors?"
 request_error_rate = access_database("request_error")
-find_request(request_error_rate)
+result(request_error_rate)
